@@ -11,7 +11,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      debugShowCheckedModeBanner: false,
       home: FirstPage(),
     );
   }
@@ -28,7 +27,7 @@ class FirstPage extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(
-                height: 200,
+                height: MediaQuery.of(context).size.height * 30 / 100,
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -53,11 +52,11 @@ class FirstPage extends StatelessWidget {
                       ),
                     ]),
               ),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 5 / 100,
               ),
               SizedBox(
-                  height: 70,
+                  height: MediaQuery.of(context).size.height * 8 / 100,
                   child: Container(
                       alignment: Alignment.topLeft,
                       child: RichText(
@@ -84,7 +83,7 @@ class FirstPage extends StatelessWidget {
                         ),
                       ))),
               SizedBox(
-                width: 360,
+                width: MediaQuery.of(context).size.width * 90 / 100,
                 child: ElevatedButton(
                   onPressed: () {},
                   child: const Text('Accept'),
@@ -95,7 +94,7 @@ class FirstPage extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                  height: 90,
+                  height: MediaQuery.of(context).size.height * 10 / 100,
                   child: Container(
                     child: const Text(
                       'OR',
@@ -106,12 +105,16 @@ class FirstPage extends StatelessWidget {
                     ),
                     alignment: Alignment.center,
                   )),
-              const SizedBox(
-                width: 360,
-                height: 50,
-                child: TextField(
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 90 / 100,
+                height: MediaQuery.of(context).size.height * 6.5 / 100,
+                child: const TextField(
                   decoration: InputDecoration(
-                      border: OutlineInputBorder(),
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                      border: OutlineInputBorder(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(10.0))),
                       labelText: 'Type in your location'),
                 ),
               ),
@@ -119,7 +122,7 @@ class FirstPage extends StatelessWidget {
                 height: 12,
               ),
               SizedBox(
-                width: 360,
+                width: MediaQuery.of(context).size.width * 91 / 100,
                 child: ElevatedButton(
                   onPressed: () {},
                   child: const Text('DONE'),
@@ -130,7 +133,7 @@ class FirstPage extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 50,
+                height: MediaQuery.of(context).size.height * 5 / 100,
                 child: Container(
                   alignment: Alignment.center,
                   child: const Text(
