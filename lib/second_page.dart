@@ -8,7 +8,7 @@ class SecondPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Map userInfo = RouteSettings(name: 'userInfo').arguments;
+    // Map userInfo = RouteSettings(name: 'userInfo').arguments;
     return Scaffold(
       appBar: AppBar(),
       body: Padding(

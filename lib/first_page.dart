@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_course_autumn_2021/second_page.dart';
+import 'package:flutter_course_autumn_2021/third_page.dart';
 
 class FirstPage extends StatelessWidget {
   FirstPage({Key key}) : super(key: key);
@@ -10,8 +11,16 @@ class FirstPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    emailController.value = TextEditingValue(text: 'closure@gmail.com');
     return Scaffold(
+      floatingActionButton: FloatingActionButton.extended(
+        label: Text('Next'),
+        icon: Icon(Icons.arrow_forward),
+        backgroundColor: Colors.deepPurple[800],
+        onPressed: () {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (_) => MyApp()));
+        },
+      ),
       appBar: AppBar(),
       body: Container(
         alignment: Alignment.center,
@@ -20,14 +29,14 @@ class FirstPage extends StatelessWidget {
             key: formKey,
             child: Column(
               children: [
-                Padding(
+                Container(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
                     validator: (value) {
-                      if (value.length > 3)
+                      if (value.contains('@'))
                         return null;
                       else
-                        return 'the value should be more than three digits';
+                        return 'the value should contains @';
                     },
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
@@ -36,10 +45,9 @@ class FirstPage extends StatelessWidget {
                       hintStyle: TextStyle(fontSize: 20),
                       // fillColor: Colors.red,
                       filled: true,
-                      focusColor: Colors.green,
+                      // focusColor: Colors.green,
                     ),
-                    enabled: true,
-                    autofocus: true,
+                    // enabled: true,
                     keyboardType: TextInputType.emailAddress,
                     controller: emailController,
                   ),
@@ -64,7 +72,6 @@ class FirstPage extends StatelessWidget {
                     ),
                     obscureText: true,
                     enabled: true,
-                    autofocus: true,
                     keyboardType: TextInputType.emailAddress,
                     controller: passwordController,
                   ),
