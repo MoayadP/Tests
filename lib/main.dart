@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
         body: ListView.builder(
           itemCount: 10,
           itemBuilder: (BuildContext context, int index) {
-            return posts_lists();
+            return PostsList();
           },
         ),
       ),
@@ -72,31 +72,66 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class posts_lists extends StatelessWidget {
-  const posts_lists({Key? key}) : super(key: key);
+class PostsList extends StatelessWidget {
+  const PostsList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 500,
+      height: 570,
       child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: SizedBox(
-          height: 600,
+        padding: const EdgeInsets.all(10.0),
+        child: Card(
+          elevation: 20,
+          shadowColor: Colors.black,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Row(
                 children: [
-                  Container(
-                    height: 60,
-                    width: 60,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                            fit: BoxFit.fill,
-                            image: AssetImage('assets/images/railway.jpg'))),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      height: 60,
+                      width: 60,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                              fit: BoxFit.fill,
+                              image: AssetImage('assets/images/railway.jpg'))),
+                    ),
                   ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        'Mira Moayad',
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        'Software Developer . 1st',
+                        style: TextStyle(fontSize: 15, color: Colors.grey[700]),
+                      ),
+                      Row(
+                        children: [
+                          Container(
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                '1w . ',
+                                style: TextStyle(
+                                    fontSize: 15, color: Colors.grey[700]),
+                              )),
+                          Icon(
+                            Icons.public,
+                            color: Colors.grey[600],
+                            size: 20,
+                          )
+                        ],
+                      ),
+                    ],
+                  )
                 ],
               ),
               const SizedBox(
@@ -106,8 +141,12 @@ class posts_lists extends StatelessWidget {
                 height: 70,
                 child: Container(
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text('Hii'),
+                    padding: const EdgeInsets.all(10.0),
+                    child: Text(
+                      'This post is a test post for the layout!',
+                      style:
+                          TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
+                    ),
                   ),
                   alignment: Alignment.topLeft,
                 ),
@@ -121,6 +160,102 @@ class posts_lists extends StatelessWidget {
                           fit: BoxFit.fill,
                           image: AssetImage('assets/images/railway.jpg'))),
                 ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                    border: Border.all(width: 0.3, color: Colors.grey)),
+                height: 40,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(6, 0, 0, 0),
+                  child: Row(
+                    // ignore: prefer_const_literals_to_create_immutables
+                    children: [
+                      Icon(Icons.beach_access),
+                      Icon(Icons.beach_access),
+                      Icon(Icons.beach_access),
+                      Text(' 1k')
+                    ],
+                  ),
+                ),
+              ),
+              Row(
+                children: [
+                  Container(
+                    alignment: Alignment.center,
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                          overlayColor:
+                              MaterialStateProperty.all(Colors.grey[200]),
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.white)),
+                      onPressed: () {},
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 41,
+                        width: 120,
+                        child: Text(
+                          'Like',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.blue),
+                        ),
+                      ),
+                    ),
+                    decoration: BoxDecoration(
+                        border: Border.all(width: 0.3, color: Colors.grey)),
+                    height: 41,
+                    width: 120,
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                          overlayColor:
+                              MaterialStateProperty.all(Colors.grey[200]),
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.white)),
+                      onPressed: () {},
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 41,
+                        width: 120,
+                        child: Text(
+                          'Comment',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.black),
+                        ),
+                      ),
+                    ),
+                    decoration: BoxDecoration(
+                        border: Border.all(width: 0.3, color: Colors.grey)),
+                    height: 41,
+                    width: 120,
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                          overlayColor:
+                              MaterialStateProperty.all(Colors.grey[200]),
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.white)),
+                      onPressed: () {},
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 41,
+                        width: 120,
+                        child: Text(
+                          'Share',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.black),
+                        ),
+                      ),
+                    ),
+                    decoration: BoxDecoration(
+                        border: Border.all(width: 0.3, color: Colors.grey)),
+                    height: 41,
+                    width: 124,
+                  ),
+                ],
               ),
             ],
           ),
