@@ -10,8 +10,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool typing = false;
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -82,40 +80,50 @@ class posts_lists extends StatelessWidget {
     return SizedBox(
       height: 500,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            ListTile(
-              leading: Container(
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image: AssetImage('assets/images/railway.jpg'))),
+        padding: const EdgeInsets.all(20.0),
+        child: SizedBox(
+          height: 600,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    height: 60,
+                    width: 60,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image: AssetImage('assets/images/railway.jpg'))),
+                  ),
+                ],
               ),
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            SizedBox(
-              height: 70,
-              child: Container(
-                child: Text('Hii'),
-                alignment: Alignment.topLeft,
+              const SizedBox(
+                height: 15,
               ),
-            ),
-            SizedBox(
-              height: 300,
-              child: Container(
-                alignment: Alignment.bottomCenter,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image: AssetImage('assets/images/railway.jpg'))),
+              SizedBox(
+                height: 70,
+                child: Container(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('Hii'),
+                  ),
+                  alignment: Alignment.topLeft,
+                ),
               ),
-            ),
-          ],
+              SizedBox(
+                height: 300,
+                child: Container(
+                  alignment: Alignment.bottomCenter,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          fit: BoxFit.fill,
+                          image: AssetImage('assets/images/railway.jpg'))),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
