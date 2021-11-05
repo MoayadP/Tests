@@ -7,7 +7,7 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.lightBlue,
+        backgroundColor: Colors.black87,
         centerTitle: true,
         title: Text(
           'Profile Page',

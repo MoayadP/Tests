@@ -8,7 +8,7 @@ class PostPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
           centerTitle: true,
-          backgroundColor: Colors.lightBlue,
+          backgroundColor: Colors.black87,
           title: Text('Post Page')),
       body: Center(
         child: Text(
