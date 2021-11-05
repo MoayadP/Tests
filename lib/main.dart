@@ -139,7 +139,7 @@ Widget postHeader() => Row(
               child: Row(
                 children: const [
                   Text(
-                    'Mira Moayad',
+                    'Flutter Course',
                     style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -314,7 +314,7 @@ Widget postActionsBar(BuildContext context) => Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         postBottomBar(
-            'Like',
+            'Liked',
             Colors.blue,
             MediaQuery.of(context).size.width * 30 / 100,
             Colors.blue,
