@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ui_test_1/post_page.dart';
 import 'package:ui_test_1/profile_page.dart';
 
+import 'date_picker_page.dart';
 import 'messenger_page.dart';
 
 void main() => runApp(MaterialApp(
@@ -11,17 +13,88 @@ void main() => runApp(MaterialApp(
     ));
 
 // ignore: use_key_in_widget_constructors
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  Home createState() => Home();
+}
+
+class Home extends State<HomePage> {
+  int _selectedIndex = 1;
+
+  final List<Widget> _widgetOptions = <Widget>[
+    Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: const [
+        Icon(
+          Icons.category,
+          size: 20,
+        ),
+        Text(
+          '  Categories',
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+        ),
+      ],
+    ),
+    ListView.builder(
+      itemCount: 10,
+      itemBuilder: (BuildContext context, int index) {
+        return PostsListState();
+      },
+    ),
+    Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: const [
+        Icon(
+          Icons.trending_up,
+          size: 20,
+        ),
+        Text(
+          '  Trending',
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+        ),
+      ],
+    ),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  int rememberMe = -1;
+  void _onRememberMeChanged(newValue) => setState(() {
+        rememberMe = newValue;
+
+        // if (rememberMe) {
+        //   // TODO: Here goes your functionality that remembers the user.
+        // } else {
+        //   // TODO: Forget the user
+        // }
+      });
+
+  bool switchChoice = false;
+
+  void _onSwitchChange(bool newValue) => setState(() {
+        switchChoice = newValue;
+
+        if (switchChoice) {
+          // TODO: Here goes your functionality that remembers the user.
+        } else {
+          // TODO: Forget the user
+        }
+      });
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBarCustom(context),
-      body: ListView.builder(
-        itemCount: 10,
-        itemBuilder: (BuildContext context, int index) {
-          return PostsListState();
-        },
-      ),
+      drawer: drawerCustom(context, _onRememberMeChanged, rememberMe,
+          _onSwitchChange, switchChoice),
+      bottomNavigationBar: bottomNavigationBar(_selectedIndex, _onItemTapped),
+      body: Center(child: _widgetOptions.elementAt(_selectedIndex)),
     );
   }
 }
@@ -92,17 +165,18 @@ PreferredSize appBarCustom(BuildContext context) => PreferredSize(
       preferredSize: Size.fromHeight(46),
       child: AppBar(
         backgroundColor: Colors.white,
-        leading: TextButton(
-          style: TextButton.styleFrom(padding: EdgeInsets.all(4)),
-          onPressed: () {},
-          child: Container(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    fit: BoxFit.fill,
-                    image: AssetImage('assets/images/tree.jpg')),
-                shape: BoxShape.circle),
-          ),
-        ),
+        leading: Builder(
+            builder: (context) => TextButton(
+                  style: TextButton.styleFrom(padding: EdgeInsets.all(4)),
+                  onPressed: () => Scaffold.of(context).openDrawer(),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image: AssetImage('assets/images/tree.jpg')),
+                        shape: BoxShape.circle),
+                  ),
+                )),
         title: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(50),
@@ -130,7 +204,7 @@ PreferredSize appBarCustom(BuildContext context) => PreferredSize(
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => MessengerPage()),
+                MaterialPageRoute(builder: (context) => DatePickerPage()),
               );
             },
             child: Icon(
@@ -140,6 +214,211 @@ PreferredSize appBarCustom(BuildContext context) => PreferredSize(
           )
         ],
       ),
+    );
+
+Widget drawerCustom(BuildContext context, _onRememberMeChanged, rememberMe,
+        _onSwitchChange, switchChoice) =>
+    Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          DrawerHeader(
+            padding: EdgeInsets.zero,
+            child: TextButton(
+              style: TextButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                  minimumSize: Size.zero,
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap),
+              child: Container(
+                  padding: EdgeInsets.all(19),
+                  alignment: Alignment.bottomLeft,
+                  child: Row(
+                    children: const [
+                      Text(
+                        'Moayad Mansour',
+                        style: TextStyle(color: Colors.white, fontSize: 17),
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Icon(Icons.verified)
+                    ],
+                  )),
+              onPressed: () {},
+            ),
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  colorFilter:
+                      ColorFilter.mode(Colors.black26, BlendMode.colorBurn),
+                  fit: BoxFit.fill,
+                  image: AssetImage('assets/images/tree.jpg')),
+            ),
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Column(
+            children: [
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('Radio button 1 : '),
+                  ),
+                  Radio(
+                      groupValue: rememberMe,
+                      value: 0,
+                      onChanged: _onRememberMeChanged),
+                ],
+              ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('Radio button 2 : '),
+                  ),
+                  Radio(
+                      groupValue: rememberMe,
+                      value: 1,
+                      onChanged: _onRememberMeChanged),
+                ],
+              ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(15.0, 15, 1, 15),
+                    child: Text(
+                      'Marah',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Icon(
+                    Icons.favorite,
+                    color: Colors.red,
+                  ),
+                  Switch(
+                    activeTrackColor: Colors.amber,
+                    activeColor: Colors.white,
+                    onChanged: _onSwitchChange,
+                    value: switchChoice,
+                  ),
+                ],
+              )
+            ],
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.account_box,
+              color: Colors.amber[900],
+            ),
+            title: Text(
+              'Account',
+              style: TextStyle(fontSize: 15, color: Colors.amber[900]),
+            ),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.person_add,
+              color: Colors.amber[900],
+            ),
+            title: Text(
+              'Friends',
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.amber[900],
+              ),
+            ),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.groups,
+              color: Colors.amber[900],
+            ),
+            title: Text(
+              'Groups',
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.amber[900],
+              ),
+            ),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.flag,
+              color: Colors.amber[900],
+            ),
+            title: Text(
+              'Pages',
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.amber[900],
+              ),
+            ),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.settings,
+              color: Colors.black87,
+            ),
+            title: Text(
+              'Settings',
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.black87,
+              ),
+            ),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.logout,
+              color: Colors.black87,
+            ),
+            title: Text(
+              'Log out',
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.black87,
+              ),
+            ),
+            onTap: () {},
+          ),
+        ],
+      ),
+    );
+
+Widget bottomNavigationBar(_selectedIndex, _onItemTapped) =>
+    BottomNavigationBar(
+      selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
+      unselectedItemColor: Colors.black87,
+      selectedItemColor: Colors.red[400],
+      elevation: 15,
+      selectedFontSize: 13,
+      unselectedFontSize: 11,
+      backgroundColor: Colors.white60,
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.category),
+          label: 'Categories',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(
+            Icons.all_inbox,
+            size: 27,
+          ),
+          label: 'Newsfeed',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.trending_up),
+          label: 'Trending',
+        ),
+      ],
+      currentIndex: _selectedIndex,
+      onTap: _onItemTapped,
     );
 
 Widget postHeader(BuildContext context, String text, VoidCallback stateSetter,
